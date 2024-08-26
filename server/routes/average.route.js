@@ -19,6 +19,6 @@ AverageInvoiceRouter
   .delete(deleteOneAverageInvoice)
   .get(getOneAverageInvoice);
 
-  AverageInvoiceRouter.route("/save-selected-invoices").post(saveSelectedInvoices); // Add this route
+  AverageInvoiceRouter.route("/save-selected-invoices").post(saveSelectedInvoices); 
 
 export default AverageInvoiceRouter;

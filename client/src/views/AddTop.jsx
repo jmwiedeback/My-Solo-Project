@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Navbar from "../components/Navbar"; // Import the Navbar component
+import Navbar from "../components/Navbar";
 
 const AddTop = () => {
   const [formData, setFormData] = useState({
@@ -12,7 +12,7 @@ const AddTop = () => {
     employeeMailingCity: "",
     totalAmountPaidPerBill: "",
   });
-  const [errorMessages, setErrorMessages] = useState({}); // State to hold error messages
+  const [errorMessages, setErrorMessages] = useState({});
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -26,13 +26,12 @@ const AddTop = () => {
     try {
       await axios.post("http://localhost:9999/largest", formData);
       alert("Invoice added successfully!");
-      navigate("/top-invoices"); // Navigate back to the list page or wherever appropriate
+      navigate("/top-invoices");
     } catch (error) {
       if (error.response && error.response.data.errors) {
         const errors = error.response.data.errors;
         const errorMessagesObj = {};
 
-        // Extract the error messages for each field
         for (let key in errors) {
           errorMessagesObj[key] = errors[key].message;
         }

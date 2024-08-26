@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Navbar from "../components/Navbar"; // Import the Navbar component
+import Navbar from "../components/Navbar"; 
 
 const UpdateTop = () => {
-  const { id } = useParams(); // Get the invoice ID from the URL
+  const { id } = useParams(); 
   const [invoice, setInvoice] = useState({
     referringProviderLastName: "",
     employeeDateOfBirth: "",
@@ -13,7 +13,7 @@ const UpdateTop = () => {
     totalAmountPaidPerBill: "",
     billId: "",
   });
-  const [errorMessages, setErrorMessages] = useState({}); // State to hold error messages
+  const [errorMessages, setErrorMessages] = useState({}); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const UpdateTop = () => {
       .then((response) => {
         const fetchedInvoice = response.data;
 
-        // Format the dates to YYYY-MM-DD
+       
         const formattedInvoice = {
           ...fetchedInvoice,
           employeeDateOfBirth: fetchedInvoice.employeeDateOfBirth
@@ -53,20 +53,20 @@ const UpdateTop = () => {
     e.preventDefault();
     const updatedInvoice = {
       ...invoice,
-      updatedAt: new Date().toISOString(), // Automatically update the updatedAt field
+      updatedAt: new Date().toISOString(), 
     };
 
     try {
       await axios.put(`http://localhost:9999/largest/${id}`, updatedInvoice);
       console.log("Invoice updated successfully:", updatedInvoice);
       alert("Invoice updated successfully!");
-      navigate("/top-invoices"); // Redirect to the list page after updating
+      navigate("/top-invoices"); 
     } catch (error) {
       if (error.response && error.response.data.errors) {
         const errors = error.response.data.errors;
         const errorMessagesObj = {};
 
-        // Extract the error messages for each field
+        
         for (let key in errors) {
           errorMessagesObj[key] = errors[key].message;
         }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Navbar from "../components/Navbar"; // Import the Navbar component
+import Navbar from "../components/Navbar";
 
 const AddAverage = () => {
   const [providerFirstName, setProviderFirstName] = useState("");
@@ -9,7 +9,7 @@ const AddAverage = () => {
     useState("");
   const [countOfEmployeeDateOfInjury, setCountOfEmployeeDateOfInjury] =
     useState("");
-  const [errorMessages, setErrorMessages] = useState({}); // State to hold error messages
+  const [errorMessages, setErrorMessages] = useState({});
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -19,19 +19,18 @@ const AddAverage = () => {
       providerFirstName,
       avgTotalAmountPaidPerBill,
       countOfEmployeeDateOfInjury,
-      employeeMailingCity: "Dallas", // Set employeeMailingCity as "Dallas"
+      employeeMailingCity: "Dallas",
     };
 
     try {
       await axios.post("http://localhost:9999/average", newInvoice);
       alert("Invoice added successfully!");
-      navigate("/average-invoices"); // Redirect to the average invoices page
+      navigate("/average-invoices");
     } catch (error) {
       if (error.response && error.response.data.errors) {
         const errors = error.response.data.errors;
         const errorMessagesObj = {};
 
-        // Extract the error messages for each field
         for (let key in errors) {
           errorMessagesObj[key] = errors[key].message;
         }

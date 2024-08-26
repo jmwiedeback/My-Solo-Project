@@ -6,7 +6,7 @@ import Navbar from "../components/Navbar";
 const ShowAverage = () => {
   const [averageInvoices, setAverageInvoices] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [invoicesPerPage] = useState(5); // Number of invoices per page
+  const [invoicesPerPage] = useState(5);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -61,10 +61,9 @@ const ShowAverage = () => {
   };
 
   const handleNavigateHome = () => {
-    navigate("/"); // Assuming the homepage route is "/"
+    navigate("/");
   };
 
-  // Calculate current invoices
   const indexOfLastInvoice = currentPage * invoicesPerPage;
   const indexOfFirstInvoice = indexOfLastInvoice - invoicesPerPage;
   const currentInvoices = averageInvoices.slice(
@@ -72,7 +71,6 @@ const ShowAverage = () => {
     indexOfLastInvoice
   );
 
-  // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleProviderClick = (id) => {

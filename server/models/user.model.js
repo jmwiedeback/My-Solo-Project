@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import bcrypt from "bcrypt"; 
+import bcrypt from "bcrypt";
 
 const UserSchema = new Schema(
   {
@@ -12,31 +12,27 @@ const UserSchema = new Schema(
     email: {
       type: String,
       required: [true, "Email is required!"],
-      unique: true, // Ensure email is unique
-      match: [
-        /^\S+@\S+\.\S+$/,
-        "Please enter a valid email address!",
-      ], // Email format validation
+      unique: true,
+      match: [/^\S+@\S+\.\S+$/, "Please enter a valid email address!"],
     },
     password: {
       type: String,
       required: [true, "Password is required!"],
-      minlength: [8, "Password must be at least 8 characters long!"], // Increase minimum length for better security
+      minlength: [8, "Password must be at least 8 characters long!"],
     },
   },
   { timestamps: true }
 );
 
-// Hash password before saving the document
 UserSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next(); // Only hash if the password is modified or new
+  if (!this.isModified("password")) return next();
 
   try {
-    const salt = await bcrypt.genSalt(10); // Generate a salt
-    this.password = await bcrypt.hash(this.password, salt); // Hash the password with the salt
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
     next();
   } catch (err) {
-    next(err); // Pass error to the next middleware
+    next(err);
   }
 });
 

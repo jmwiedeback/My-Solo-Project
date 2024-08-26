@@ -13,14 +13,13 @@ const createLargestInvoice = async (req, res) => {
   try {
     console.log(req.body);
     const newLargestInvoice = new LargestInvoice(req.body);
-    const savedInvoice = await newLargestInvoice.save(); // Changed variable name to 'savedInvoice'
-    res.json(savedInvoice); // Return the saved invoice instead
+    const savedInvoice = await newLargestInvoice.save();
+    res.json(savedInvoice);
   } catch (error) {
     console.log(error);
     res.status(400).json(error);
   }
 };
-
 
 const getOneLargestInvoice = async (req, res) => {
   try {
@@ -39,7 +38,11 @@ const updateOneLargestInvoiceById = async (req, res, next) => {
     runValidators: true,
   };
   try {
-    const updatedLargestInvoice = await LargestInvoice.findByIdAndUpdate(id, req.body, options);
+    const updatedLargestInvoice = await LargestInvoice.findByIdAndUpdate(
+      id,
+      req.body,
+      options
+    );
 
     res.status(200).json(updatedLargestInvoice);
   } catch (error) {
@@ -58,30 +61,27 @@ const deleteOneLargestInvoice = async (req, res, next) => {
 };
 
 const saveSelectedLargestInvoices = async (req, res) => {
-    console.log("Hello", req.body);
-    try {
-      const records = req.body;
-  
-      // Insert multiple records into the database
-      const insertedRecords = await LargestInvoice.insertMany(
-        records.map((record) => ({
-          referringProviderLastName: record.referring_provider_last_name,
-          employeeDateOfBirth: new Date(record.employee_date_of_birth), 
-          employeeDateOfInjury: new Date(record.employee_date_of_injury), 
-          employeeMailingCity: record.employee_mailing_city, 
-          totalAmountPaidPerBill: record.total_amount_paid_per_bill,
-          billId: record.bill_id, 
-        }))
-      );
-  
-      res.status(201).json(insertedRecords);
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({ message: "Error saving data", error });
-    }
-  };
-  
+  console.log("Hello", req.body);
+  try {
+    const records = req.body;
 
+    const insertedRecords = await LargestInvoice.insertMany(
+      records.map((record) => ({
+        referringProviderLastName: record.referring_provider_last_name,
+        employeeDateOfBirth: new Date(record.employee_date_of_birth),
+        employeeDateOfInjury: new Date(record.employee_date_of_injury),
+        employeeMailingCity: record.employee_mailing_city,
+        totalAmountPaidPerBill: record.total_amount_paid_per_bill,
+        billId: record.bill_id,
+      }))
+    );
+
+    res.status(201).json(insertedRecords);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error saving data", error });
+  }
+};
 
 const deleteAllLargestInvoices = async (req, res) => {
   try {
@@ -99,5 +99,5 @@ export {
   deleteOneLargestInvoice,
   getAllLargestInvoice,
   saveSelectedLargestInvoices,
-  deleteAllLargestInvoices, // Add this line
+  deleteAllLargestInvoices,
 };

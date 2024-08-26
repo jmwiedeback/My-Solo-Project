@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Navbar from "../components/Navbar"; // Import the Navbar component
+import Navbar from "../components/Navbar";
 
 const UpdateAverage = () => {
-  const { id } = useParams(); // Get the invoice ID from the URL
+  const { id } = useParams();
   const [invoice, setInvoice] = useState({
     providerFirstName: "",
     avgTotalAmountPaidPerBill: "",
     countOfEmployeeDateOfInjury: "",
   });
-  const [errorMessages, setErrorMessages] = useState({}); // State to hold error messages
+  const [errorMessages, setErrorMessages] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -48,7 +48,6 @@ const UpdateAverage = () => {
           const errors = error.response.data.errors;
           const errorMessagesObj = {};
 
-          // Extract the error messages for each field
           for (let key in errors) {
             errorMessagesObj[key] = errors[key].message;
           }

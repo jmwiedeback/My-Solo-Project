@@ -1,6 +1,6 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken"; // Assuming you're using JWT for tokens
+import jwt from "jsonwebtoken"; 
 
 const createUser = async (req, res) => {
   try {
@@ -9,7 +9,7 @@ const createUser = async (req, res) => {
     res.json(user);
   } catch (error) {
     if (error.name === "ValidationError") {
-      // Send the validation error messages as a response
+      
       const errors = Object.values(error.errors).map(err => err.message);
       return res.status(400).json({ messages: errors });
     }

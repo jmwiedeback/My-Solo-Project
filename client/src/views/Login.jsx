@@ -6,14 +6,14 @@ const Login = () => {
   // Login form state
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  const [loginErrorMessage, setLoginErrorMessage] = useState(""); // Separate state for login error
+  const [loginErrorMessage, setLoginErrorMessage] = useState(""); //  state for login error
 
   // Signup form state
   const [signupName, setSignupName] = useState("");
   const [signupEmail, setSignupEmail] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
   const [confirmSignupPassword, setConfirmSignupPassword] = useState("");
-  const [signupErrorMessage, setSignupErrorMessage] = useState(""); // Separate state for signup error
+  const [signupErrorMessage, setSignupErrorMessage] = useState(""); // state for signup error
 
   const navigate = useNavigate();
 

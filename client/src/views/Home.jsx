@@ -102,7 +102,7 @@ const Home = () => {
     console.log("Selected Records:", selectedRecords);
 
     if (selectedOption === "top") {
-      // Save selected records to the database
+    
       axios
         .post(
           "http://localhost:9999/largest/save-selected-invoices",
